@@ -1,1 +1,37 @@
+import java.util.Scanner;
 
+public class CharacterStuffing {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter the data: ");
+        String data = sc.nextLine();
+
+        char flag = 'F';
+        char escape = 'E';
+
+        StringBuilder stuffed = new StringBuilder();
+
+        // Add starting flag
+        stuffed.append(flag);
+
+        for (int i = 0; i < data.length(); i++) {
+            char ch = data.charAt(i);
+
+            // If character is Flag or Escape, insert Escape before it
+            if (ch == flag || ch == escape) {
+                stuffed.append(escape);
+            }
+
+            stuffed.append(ch);
+        }
+
+        // Add ending flag
+        stuffed.append(flag);
+
+        System.out.println("Original Data : " + data);
+        System.out.println("Stuffed Data  : " + stuffed);
+
+        sc.close();
+    }
+}
