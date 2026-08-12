@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class CharacterCount {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of frames: ");
+        int n = sc.nextInt();
+
+        sc.nextLine();
+
+        StringBuilder transmittedData = new StringBuilder();
+
+        for (int i = 1; i <= n; i++) {
+            System.out.print("Enter frame " + i + ": ");
+            String frame = sc.nextLine();
+
+            int count = frame.length() + 1;
+
+            transmittedData.append(count).append(frame);
+        }
+
+        System.out.println("\nTransmitted data:");
+        System.out.println(transmittedData);
+
+        sc.close();
+    }
+}
