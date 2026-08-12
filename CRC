@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+public class CRC {
+    static String divide(String data, String generator) {
+        char[] bits = data.toCharArray();
+        int n = generator.length();
+
+        for (int i = 0; i <= bits.length - n; i++) {
+            if (bits[i] == '1') {
+                for (int j = 0; j < n; j++) {
+                    bits[i + j] = (bits[i + j] == generator.charAt(j))
+                            ? '0' : '1';
+                }
+            }
+        }
+
+        return new String(bits, bits.length - n + 1, n - 1);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter data bits: ");
+        String data = sc.nextLine();
+
+        System.out.print("Enter generator: ");
+        String generator = sc.nextLine();
+
+        // Append zeros to the data
+        String appendedData = data + "0".repeat(generator.length() - 1);
+
+        // Calculate CRC
+        String crc = divide(appendedData, generator);
+
+        // Codeword = original data + CRC
+        String codeword = data + crc;
+
+        System.out.println("CRC         : " + crc);
+        System.out.println("Codeword    : " + codeword);
+
+        // Receiver side
+        System.out.print("Enter received data: ");
+        String received = sc.nextLine();
+
+        String remainder = divide(received, generator);
+
+        if (remainder.indexOf('1') == -1) {
+            System.out.println("No error detected.");
+        } else {
+            System.out.println("Error detected!");
+        }
+
+        sc.close();
+    }
+}
