@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class CharacterDeStuffing {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter the stuffed data: ");
+        String data = sc.nextLine();
+
+        char flag = 'F';
+        char escape = 'E';
+
+        StringBuilder destuffed = new StringBuilder();
+
+        // Skip the starting and ending flag
+        for (int i = 1; i < data.length() - 1; i++) {
+            char ch = data.charAt(i);
+
+            // If escape character is found, skip it
+            if (ch == escape) {
+                i++;
+            }
+
+            destuffed.append(data.charAt(i));
+        }
+
+        System.out.println("Stuffed Data   : " + data);
+        System.out.println("Original Data  : " + destuffed);
+
+        sc.close();
+    }
+}
